@@ -2,7 +2,12 @@
 
 namespace Modular\Cms\Footer;
 
-interface FooterRepositoryInterface
-{
+use Modular\Core\Driver\Mysql\RepositoryInterface;
 
+interface FooterRepositoryInterface extends RepositoryInterface
+{
+    /**
+     * @return array
+     */
+    public function getData(): array;
 }

@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'cs',
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'cs',
 
     /*
     |--------------------------------------------------------------------------
@@ -135,10 +135,6 @@ return [
     */
 
     'providers' => [
-
-        /*
-         * Laravel Framework Service Providers...
-         */
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -165,7 +161,13 @@ return [
         /*
          * Package Service Providers...
          */
-        \Modular\Cms\CmsServiceProvider::class,
+
+        /*
+         * Workbench Service Providers...
+         */
+        Modular\Cms\CmsServiceProvider::class,
+        Modular\CmsAdmin\CmsAdminServiceProvider::class,
+        Modular\Core\CoreServiceProvider::class,
 
         /*
          * Application Service Providers...
