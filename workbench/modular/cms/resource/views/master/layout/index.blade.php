@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="has-navbar-fixed-top" lang="{{ app()->getLocale() }}">
+<html class="has-navbar-fixed-top" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         @include('modular-cms::master.layout.head')
     </head>

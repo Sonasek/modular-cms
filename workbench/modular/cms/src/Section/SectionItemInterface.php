@@ -41,4 +41,19 @@ interface SectionItemInterface
      */
     public function getPanels(): array;
 
+    /**
+     * @return int
+     */
+    public function getTypeId(): int;
+
+    /**
+     * @return string
+     */
+    public function getData(): string;
+
+    /**
+     * @return string
+     */
+    public function getView(): string;
+
 }

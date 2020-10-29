@@ -3,6 +3,7 @@
 namespace Modular\Core\ServiceProvider;
 
 use Illuminate\Support\Facades\Log;
+use Illuminate\Routing\Router;
 
 /**
  * Class ServiceProvider
@@ -87,8 +88,13 @@ abstract class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     protected function registerSingletons(): void
     {
-        foreach (config($this->vendorNamespace . '::bind') as $abstract => $concrete) {
-            $this->app->singleton($abstract, $concrete);
+        if(is_array(config($this->vendorNamespace . '::bind'))){
+            foreach (config($this->vendorNamespace . '::bind') as $abstract => $concrete) {
+                $this->app->singleton($abstract, $concrete);
+            }
+        }
+        else {
+            Log::alert('Soubor config/bind.php nenalezen, singletony nebyly načteny !');
         }
     }
 
@@ -107,4 +113,23 @@ abstract class ServiceProvider extends \Illuminate\Support\ServiceProvider
             Log::alert('Složka ' . $fileDir . ' nenalezena, migrace nebyly načteny !');
         }
     }
+
+    /**
+     * Načte middleware z configu config/middleware.php
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    protected function loadMiddlewares(): void
+    {
+        $router = app()->make(Router::class);
+        if(is_array(config($this->vendorNamespace . '::middlewares'))){
+            foreach (config($this->vendorNamespace . '::middlewares') as $abstract => $concrete) {
+                $router->aliasMiddleware($abstract, $concrete);
+            }
+        }
+        else {
+            Log::alert('Soubor config/middlewares.php nenalezen, middlewary nebyly načteny !');
+        }
+    }
+
 }

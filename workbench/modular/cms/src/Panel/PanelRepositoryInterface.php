@@ -13,4 +13,10 @@ interface PanelRepositoryInterface extends RepositoryInterface
      * @return array
      */
     public function getBySection(SectionItemInterface $sectionItem): array;
+    /**
+     * @param array $collection
+     *
+     * @return array
+     */
+    public function getBySections(array $collection): array;
 }

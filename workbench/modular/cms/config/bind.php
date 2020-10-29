@@ -8,6 +8,6 @@ return [
     \Modular\Cms\Header\HeaderRepositoryInteface::class => \Modular\Cms\Driver\Mysql\Header\HeaderRepository::class,
     \Modular\Cms\Menu\MenuRepositoryInterface::class => \Modular\Cms\Driver\Mysql\Menu\MenuRepository::class,
     \Modular\Cms\Page\PageRepositoryInterface::class => \Modular\Cms\Driver\Mysql\Page\PageRepository::class,
-    \Modular\Cms\Panel\PanelRepositoryInterface::class => \Modular\Cms\Driver\Mysql\Panel\PanelRepository::class,
+    \Modular\Cms\Panel\PanelTypeRepositoryInterface::class => \Modular\Cms\Driver\Mysql\Panel\PanelTypeRepository::class,
     \Modular\Cms\Section\SectionRepositoryInterface::class => \Modular\Cms\Driver\Mysql\Section\SectionRepository::class,
 ];

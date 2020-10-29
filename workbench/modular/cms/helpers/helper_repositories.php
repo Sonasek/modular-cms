@@ -111,3 +111,35 @@ if (!function_exists('modularCmsSection')) {
         return $service;
     }
 }
+
+if (!function_exists('modularCmsPanelType')) {
+    /**
+     * @return \Modular\Cms\Driver\Mysql\PanelType\PanelTypeRepository
+     */
+    function modularCmsPanelType(): \Modular\Cms\Driver\Mysql\PanelType\PanelTypeRepository
+    {
+        static $service = null;
+
+        if (null === $service) {
+            $service = app(\Modular\Cms\Driver\Mysql\PanelType\PanelTypeRepository::class);
+        }
+
+        return $service;
+    }
+}
+
+if (!function_exists('modularCmsSectionType')) {
+    /**
+     * @return \Modular\Cms\Driver\Mysql\SectionType\SectionTypeRepository
+     */
+    function modularCmsSectionType(): \Modular\Cms\Driver\Mysql\SectionType\SectionTypeRepository
+    {
+        static $service = null;
+
+        if (null === $service) {
+            $service = app(\Modular\Cms\Driver\Mysql\SectionType\SectionTypeRepository::class);
+        }
+
+        return $service;
+    }
+}

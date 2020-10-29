@@ -165,9 +165,10 @@ return [
         /*
          * Workbench Service Providers...
          */
+        Modular\Core\CoreServiceProvider::class,
+        Modular\Admin\AdminServiceProvider::class,
         Modular\Cms\CmsServiceProvider::class,
         Modular\CmsAdmin\CmsAdminServiceProvider::class,
-        Modular\Core\CoreServiceProvider::class,
 
         /*
          * Application Service Providers...

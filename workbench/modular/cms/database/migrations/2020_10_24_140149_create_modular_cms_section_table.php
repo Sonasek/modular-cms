@@ -16,8 +16,11 @@ class CreateModularCmsSectionTable extends Migration
         Schema::create('modular_cms_section', function (Blueprint $table) {
             $table->id();
             $table->integer('page_id');
-            $table->string('name');
-            $table->string('content');
+            $table->string('name', 255);
+            $table->string('title', 255)->nullable();
+            $table->string('subtitle', 255)->nullable();
+            $table->integer('type');
+            $table->text('data');
             $table->timestamps();
         });
     }

@@ -1,28 +1,22 @@
 @if(0 !== count($sections))
     @foreach($sections as $section)
-        <section>
+        <section class="section {{ (isset($class))?$class:'' }}">
             <div class="container">
                 @if(null !== $section->getTitle())
-                    <h2 class="title">
-                        {{ $section->getTitle() }}
-                    </h2>
+                    <a href="#{{ $section->getName() }}">
+                        <h2 class="title modular-section-title" id="{{ $section->getName() }}">
+                            {{ $section->getTitle() }}
+                        </h2>
+                    </a>
                 @endif
+
                 @if(null !== $section->getSubtitle())
                     <p class="subtitle">
                         {{ $section->getSubtitle() }}
                     </p>
                 @endif
-                @if(0 !== count($section->getPanels()))
-                    <div class="columns">
-                        @foreach($section->getPanels() as $panel)
-                            <div class="column">
-                                <p>
-                                    {!! $panel->getCode() !!}
-                                </p>
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
+
+                @include($section->getView())
             </div>
         </section>
     @endforeach

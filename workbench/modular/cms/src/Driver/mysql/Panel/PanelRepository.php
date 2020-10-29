@@ -2,6 +2,7 @@
 
 namespace Modular\Cms\Driver\Mysql\Panel;
 
+use Illuminate\Support\Facades\DB;
 use Modular\Cms\Section\SectionItemInterface;
 use Modular\Core\Driver\Mysql\Repository;
 
@@ -14,10 +15,13 @@ class PanelRepository extends Repository implements \Modular\Cms\Panel\PanelRepo
 {
     protected $tableName = 'modular_cms_panel';
     protected $columns = [
-        'id',
+        'modular_cms_panel.id',
         'section_id',
-        'type',
+        'type_id',
+        'parent_id',
         'code',
+        'order',
+        'view',
     ];
 
     /**
@@ -54,11 +58,13 @@ class PanelRepository extends Repository implements \Modular\Cms\Panel\PanelRepo
 
         if(count($sectionIds) !== count($setSectionIds))
         {
-            $panels = $this->convertToItems(
-                $this->getSqlBuilder()
-                    ->whereIn('section_id', array_diff($sectionIds, $setSectionIds))
-                    ->get(),
-                PanelItem::class
+            $panels = $this->sortChild(
+                $this->convertToItems(
+                    $this->getSqlBuilder()
+                        ->whereIn('section_id', array_diff($sectionIds, $setSectionIds))
+                        ->get(),
+                    PanelItem::class
+                )
             );
 
             foreach ($panels as $panel){
@@ -67,5 +73,37 @@ class PanelRepository extends Repository implements \Modular\Cms\Panel\PanelRepo
         }
 
         return $this->getItemsFromMemory($sectionIds);
+    }
+
+    private function sortChild(array $unsortedPanelItems, $parentId = null): array
+    {
+        $sortedPanelItems = [];
+        $panelsToSort = [];
+
+        foreach($unsortedPanelItems as $unsortedPanelItem){
+            if($parentId == $unsortedPanelItem->getParentId()){
+                $sortedPanelItems[$unsortedPanelItem->getId()] = $unsortedPanelItem;
+            }
+            else {
+                $panelsToSort[] = $unsortedPanelItem;
+            }
+        }
+
+        foreach($sortedPanelItems as $sortedPanelItem){
+            foreach($this->sortChild($panelsToSort, $sortedPanelItem->getId()) as $panel){
+                $sortedPanelItem->addChild($panel);
+            }
+        }
+
+
+        return $sortedPanelItems;
+    }
+
+    protected function getSqlBuilder()
+    {
+        return DB::table($this->tableName)
+            ->select($this->columns)
+            ->join('modular_cms_panel_type', 'modular_cms_panel.type_id', '=', 'modular_cms_panel_type.id')
+            ->orderBy('order', 'desc');
     }
 }

@@ -28,6 +28,7 @@ class CmsServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
         $this->registerConfig();
         if(config($this->vendorNamespace. '::config.enabled')){
             $this->registerSingletons();

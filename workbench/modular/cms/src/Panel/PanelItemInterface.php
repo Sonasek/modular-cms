@@ -15,12 +15,17 @@ interface PanelItemInterface
     public function getSectionId(): int;
 
     /**
-     * @return string
+     * @return int
      */
-    public function getType(): string;
+    public function getTypeId(): int;
+
+    /**
+     * @return array
+     */
+    public function getCode(): array;
 
     /**
      * @return string
      */
-    public function getCode(): string;
+    public function getView(): string;
 }

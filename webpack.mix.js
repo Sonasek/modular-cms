@@ -11,6 +11,5 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.sass('resources/sass/style.sass', 'public/css', [
-       //
-   ]);
+mix.sass('resources/sass/style.sass', 'public/css').
+    less('resources/less/fontawesome.less', 'public/css');

@@ -28,14 +28,29 @@ class SectionItem extends Item implements \Modular\Cms\Section\SectionItemInterf
     protected $name;
 
     /**
-     * @var
+     * @var string
      */
     protected $title;
 
     /**
-     * @var
+     * @var string
      */
     protected $subtitle;
+
+    /**
+     * @var int
+     */
+    protected $type_id;
+
+    /**
+     * @var string
+     */
+    protected $data;
+
+    /**
+     * @var string
+     */
+    protected $view;
 
     /**
      * @var array
@@ -96,6 +111,30 @@ class SectionItem extends Item implements \Modular\Cms\Section\SectionItemInterf
     public function getPanels(): array
     {
         return $this->panels;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTypeId(): int
+    {
+        return $this->type_id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getData(): string
+    {
+        return $this->data;
+    }
+
+    /**
+     * @return string
+     */
+    public function getView(): string
+    {
+        return $this->view;
     }
 
 }

@@ -16,7 +16,8 @@ class CreateModularCmsPanelTable extends Migration
         Schema::create('modular_cms_panel', function (Blueprint $table) {
             $table->id();
             $table->integer('section_id');
-            $table->string('type');
+            $table->integer('type_id');
+            $table->integer('parent_id');
             $table->string('code');
             $table->timestamps();
         });

@@ -121,6 +121,9 @@ class MenuItem extends Item implements \Modular\Cms\Menu\MenuItemInterface
         return $this->childItems;
     }
 
+    /**
+     * @return bool
+     */
     public function hasChild(): bool
     {
         if(0 == count($this->childItems)){
@@ -129,6 +132,4 @@ class MenuItem extends Item implements \Modular\Cms\Menu\MenuItemInterface
 
         return true;
     }
-
-
 }

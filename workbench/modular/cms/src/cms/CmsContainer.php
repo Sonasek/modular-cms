@@ -60,11 +60,11 @@ class CmsContainer implements CmsContainerInterface
         $this->sections = modularCmsSection()->getDataByPage($this->page);
 
         // načteme data pro jednotlivé panely v sekcích
-        $panels = modularCmsPanel()->getBySections($this->sections);
-        foreach($panels as $panel) {
-            foreach ($panel as $item)
+        $sectionPanels = modularCmsPanel()->getBySections($this->sections);
+        foreach($sectionPanels as $panels) {
+            foreach ($panels as $panel)
             {
-                $this->sections[$item->getSectionId()]->addPanel($item);
+                $this->sections[$panel->getSectionId()]->addPanel($panel);
             }
         }
 
