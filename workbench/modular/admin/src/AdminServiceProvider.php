@@ -2,6 +2,8 @@
 
 namespace Modular\Admin;
 
+use Livewire\Livewire;
+use Modular\Admin\Http\Livewire\LoginForm;
 use Modular\Core\ServiceProvider\ServiceProvider;
 
 /**
@@ -45,9 +47,11 @@ class AdminServiceProvider extends ServiceProvider
             $this->loadMigrations();
         }
         if(config($this->vendorNamespace. '::config.enabled')){
+            Livewire::component($this->vendorNamespace . '::login-form', LoginForm::class);
             $this->loadRoutes();
             $this->loadViews();
             $this->loadMiddlewares();
+            $this->loadTranslations();
         }
     }
 }

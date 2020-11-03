@@ -1,5 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-Route::get('/{page_tag?}', \Modular\Cms\Http\Controllers\PageController::class);
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/{page_tag?}', \Modular\Cms\Http\Controllers\PageController::class)
+        ->name('homepage');
+});

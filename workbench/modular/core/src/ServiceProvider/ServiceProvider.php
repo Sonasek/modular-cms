@@ -4,6 +4,7 @@ namespace Modular\Core\ServiceProvider;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\App;
 
 /**
  * Class ServiceProvider
@@ -47,12 +48,12 @@ abstract class ServiceProvider extends \Illuminate\Support\ServiceProvider
     }
 
     /**
-     * Registruje views ze zadané složky, defaultně '/resource/views/'
+     * Registruje views ze zadané složky, defaultně '/resources/views/'
      * Složka se zadává od kořenového adresáře balíku.
      *
      * @param string $viewsDir
      */
-    protected function loadViews(string $viewsDir = '/resource/views/'): void
+    protected function loadViews(string $viewsDir = '/resources/views/'): void
     {
         $fileDir = ( __DIR__ . '/../../../' . $this->vendorDir . $viewsDir);
         if(is_dir($fileDir)){
@@ -130,6 +131,18 @@ abstract class ServiceProvider extends \Illuminate\Support\ServiceProvider
         else {
             Log::alert('Soubor config/middlewares.php nenalezen, middlewary nebyly načteny !');
         }
+    }
+
+    protected function loadTranslations(string $translationsDir = '/resources/lang/'): void
+    {
+        $fileDir = ( __DIR__ . '/../../../' . $this->vendorDir . $translationsDir);
+        if(is_dir($fileDir)){
+            $this->loadTranslationsFrom($fileDir, $this->vendorNamespace);
+        }
+        else {
+            Log::alert('Složka ' . $fileDir . ' nenalezena, překlady nebyly načteny !');
+        }
+
     }
 
 }

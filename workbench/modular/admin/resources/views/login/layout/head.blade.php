@@ -5,3 +5,4 @@
 <meta name="author" content="Sonasek|son4s3k@gmail.com">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/fontawesome.css">
+@livewireStyles

@@ -15,7 +15,7 @@ class AdminLoginpageController extends BaseController
     public function __invoke()
     {
         if(Auth::check()){
-            return redirect(route('admin'));
+            return redirect(route('admin.homepage'));
         }
 
         return view('modular-admin::login');
